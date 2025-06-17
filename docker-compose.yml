@@ -1,0 +1,14 @@
+services:
+  server-dotnet.api:
+    image: ${DOCKER_REGISTRY-}serverdotnetapi
+    build:
+      context: .
+      dockerfile: src/server-dotnet.Api/Dockerfile
+
+  seq:
+    image: datalust/seq:latest
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+
+

@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\src\server-dotnet.Api\server-dotnet.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\app\server-dotnet.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
