@@ -25,10 +25,10 @@ class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Response<Get
     
     public async Task<Response<GetOrderByIdQueryResponse>> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
     {
-        var order = await _dbContext.Orders
-            .AsNoTracking()
+        var order = await _dbContext.Orders            
             .Include(n => n.Organization)
             .Include(n => n.User)
+            .AsNoTracking()
             .FirstOrDefaultAsync(n => n.Id == request.Id, cancellationToken);
 
         if (order is null)
