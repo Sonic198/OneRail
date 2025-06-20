@@ -19,23 +19,22 @@ class ValidationBehavior<TRequest, TResponse> : BehaviorBase<TRequest, TResponse
 
     public override async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        if (_validators.Any())
-        {
-            var context = new ValidationContext<TRequest>(request);
+        if (!_validators.Any())
+            return await next();
 
-            var validationResults = await Task.WhenAll(
-                _validators.Select(n => n.ValidateAsync(context, cancellationToken)));
+        var context = new ValidationContext<TRequest>(request);
 
-            var failures = validationResults
-                .SelectMany(r => r.Errors)
-                .Where(f => f != null)
-                .ToList();
+        var validationResults = await Task.WhenAll(
+            _validators.Select(n => n.ValidateAsync(context, cancellationToken)));
 
-            if (failures.Count > 0)
-            {
-                return GetErrorResponse(new ValidationFailedResponse(failures.GetErrors()));
-            }
-        }
+        var failures = validationResults
+            .SelectMany(r => r.Errors)
+            .Where(f => f != null)
+            .ToList();
+
+        if (failures.Count > 0)
+            return GetErrorResponse(new ValidationFailedResponse(failures.GetErrors()));
+
         return await next();
     }
 }

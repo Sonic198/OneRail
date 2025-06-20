@@ -4,9 +4,9 @@ public static class HealthCheck
 {
     public static class Endpoints
     {
-        public const string AllDetails = "/health";
-        public const string LivenessProbe = "/health/live";
-        public const string ReadinessProbe = "/health/ready";
+        public const string AllDetails = "/health/details";
+        public const string LivenessProbe = "/health";
+        public const string ReadinessProbe = "/readiness";
     }
 
     public static class Tags

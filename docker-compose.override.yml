@@ -4,6 +4,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__SqlServer=Server=host.docker.internal,1433;Database=TestDatabase;User Id=sa;Password=Passw0rd;TrustServerCertificate=True;
+      - Serilog__WriteTo__0__Args__serverUrl=http://host.docker.internal:5341
     ports:
       - "8080"
       - "8081"

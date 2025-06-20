@@ -18,9 +18,8 @@ public class OrderEndpointDefinition : IEndpointDefinition
             return response.MatchResponse(context);
         });
 
-        orders.MapGet("/{id:int}", async (IMediator mediator, HttpContext context, int id) =>
+        orders.MapGet("/{id:int}", async (IMediator mediator, HttpContext context, [AsParameters] GetOrderByIdQuery query) =>
         {
-            var query = new GetOrderByIdQuery(id);
             var response = await mediator.Send(query);
             return response.MatchResponse(context);
         });

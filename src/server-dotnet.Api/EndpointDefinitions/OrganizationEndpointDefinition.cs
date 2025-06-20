@@ -18,9 +18,8 @@ public class OrganizationEndpointDefinition : IEndpointDefinition
             return response.MatchResponse(context);
         });
 
-        organizations.MapGet("/{id:int}", async (IMediator mediator, HttpContext context, int id) =>
+        organizations.MapGet("/{id:int}", async (IMediator mediator, HttpContext context, [AsParameters] GetOrganizationByIdQuery query) =>
         {
-            var query = new GetOrganizationByIdQuery(id);
             var response = await mediator.Send(query);
             return response.MatchResponse(context);
         });

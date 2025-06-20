@@ -1,9 +1,9 @@
-using System;
 using Serilog;
 using server_dotnet.Application;
 using server_dotnet.Constants;
 using server_dotnet.Extensions;
 using server_dotnet.Infrastructure;
+using server_dotnet.Infrastructure.Data;
 using server_dotnet.Serilog;
 using server_dotnet.Services;
 using server_dotnet.Services.Interfaces;
@@ -21,6 +21,7 @@ try
 
     builder.Services.AddCors();
     builder.Services.AddHttpContextAccessor();
+    builder.Services.AddEndpointsApiExplorer();
 
     // services
     builder.Services.AddSingleton<IActivityProvider, ActivityProvider>();
@@ -33,6 +34,15 @@ try
     builder.Services.AddOpenApiDocument();
 
     var app = builder.Build();
+
+    if (app.Environment.IsDevelopment())
+    {
+        await using (var scope = app.Services.CreateAsyncScope())
+        await using (var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
+        {
+            await dbContext.Database.EnsureCreatedAsync();
+        }
+    }
 
     app.UseCustomExceptionHandler();
 

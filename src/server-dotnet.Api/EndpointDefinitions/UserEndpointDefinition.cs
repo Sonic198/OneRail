@@ -18,9 +18,8 @@ public class UserEndpointDefinition : IEndpointDefinition
             return response.MatchResponse(context);
         });
 
-        users.MapGet("/{id:int}", async (IMediator mediator, HttpContext context, int id) =>
-        {
-            var query = new GetUserByIdQuery(id);
+        users.MapGet("/{id:int}", async (IMediator mediator, HttpContext context, [AsParameters] GetUserByIdQuery query) =>
+        {            
             var response = await mediator.Send(query);
             return response.MatchResponse(context);
         });

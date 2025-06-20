@@ -2,7 +2,7 @@
 using server_dotnet.Domain.Entities;
 
 namespace server_dotnet.Application.Common.Interfaces;
-public interface IApplicationDbContext
+public interface IApplicationDbContext : IAsyncDisposable
 {
     DbSet<UserEntity> Users { get; }
     DbSet<OrderEntity> Orders { get; }
