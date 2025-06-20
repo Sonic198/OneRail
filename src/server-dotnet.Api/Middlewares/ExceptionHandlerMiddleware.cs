@@ -8,7 +8,7 @@ using server_dotnet.Services.Interfaces;
 
 namespace server_dotnet.Middlewares;
 
-internal class ExceptionHandlerMiddleware
+public class ExceptionHandlerMiddleware
 {
     private readonly ILogger<ExceptionHandlerMiddleware> _logger;
     private readonly IActivityProvider _activityProvider;

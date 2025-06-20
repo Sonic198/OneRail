@@ -10,7 +10,7 @@ public class OrderEndpointDefinition : IEndpointDefinition
 {
     public void RegisterEndpoints(WebApplication app)
     {
-        var orders = app.MapGroup("/api/orders").WithTags("Orders");
+        var orders = app.MapGroup("/api/orders").WithTags("Orders").RequireAuthorization();
 
         orders.MapGet("/", async (IMediator mediator, HttpContext context, [AsParameters] GetOrdersQuery query) =>
         {

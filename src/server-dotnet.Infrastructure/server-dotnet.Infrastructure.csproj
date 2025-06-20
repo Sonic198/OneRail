@@ -21,8 +21,4 @@
     <ProjectReference Include="..\server-dotnet.Application\server-dotnet.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Interceptors\" />
-  </ItemGroup>
-
 </Project>

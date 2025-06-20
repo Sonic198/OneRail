@@ -10,7 +10,7 @@ public class OrganizationEndpointDefinition : IEndpointDefinition
 {
     public void RegisterEndpoints(WebApplication app)
     {
-        var organizations = app.MapGroup("/api/organizations").WithTags("Organizations");
+        var organizations = app.MapGroup("/api/organizations").WithTags("Organizations").RequireAuthorization().RequireRateLimiting("organizationRateLimiter");
 
         organizations.MapGet("/", async (IMediator mediator, HttpContext context, [AsParameters] GetOrganizationsQuery query) =>
         {

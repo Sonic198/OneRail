@@ -10,7 +10,7 @@ public class UserEndpointDefinition : IEndpointDefinition
 {
     public void RegisterEndpoints(WebApplication app)
     {
-        var users = app.MapGroup("/api/users").WithTags("Users");
+        var users = app.MapGroup("/api/users").WithTags("Users").RequireAuthorization();
 
         users.MapGet("/", async (IMediator mediator, HttpContext context, [AsParameters] GetUsersQuery query) =>
         {
